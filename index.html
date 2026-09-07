@@ -3,25 +3,31 @@
 <head>
     <title>Login</title>
     <style>
-        body { font-family: Arial; text-align: center; padding: 50px; }
-        input { padding: 10px; font-size: 16px; }
-        button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
+        body { text-align: center; padding: 100px; font-family: Arial; }
+        input { padding: 10px; font-size: 16px; width: 200px; }
+        button { padding: 10px 30px; font-size: 16px; cursor: pointer; }
+        .error { color: red; }
     </style>
 </head>
 <body>
-    <h1>🔐 Accesso</h1>
-    <input type="password" id="pwd" placeholder="Inserisci password">
-    <button onclick="check()">Accedi</button>
-    <p id="err" style="color:red; display:none;">Password sbagliata!</p>
-    
+    <h1>🔐 Accesso Riservato</h1>
+    <p>
+        <input type="password" id="pass" placeholder="Password">
+        <button onclick="accedi()">Accedi</button>
+    </p>
+    <p class="error" id="err" style="display:none;">Password errata!</p>
+
     <script>
-        const pass = 'watchegypt2026';
-        function check() {
-            if (document.getElementById('pwd').value === pass) {
-                window.location = 'egitto-gestionale-pwa.html';
+        function accedi() {
+            if (document.getElementById('pass').value === 'watchcrypt2026') {
+                document.body.innerHTML = '<iframe src="egitto-gestionale-pwa.html" style="width:100vw; height:100vh; border:none;"></iframe>';
             } else {
                 document.getElementById('err').style.display = 'block';
+                document.getElementById('pass').value = '';
             }
+        }
+        document.getElementById('pass').onkeypress = function(e) {
+            if (e.key === 'Enter') accedi();
         }
     </script>
 </body>
