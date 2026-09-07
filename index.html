@@ -1,130 +1,26 @@
 <!DOCTYPE html>
-<html lang="it">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        
-        .login-container {
-            background: white;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-            width: 100%;
-            max-width: 400px;
-        }
-        
-        h1 {
-            text-align: center;
-            margin-bottom: 30px;
-            color: #333;
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        label {
-            display: block;
-            margin-bottom: 8px;
-            color: #555;
-            font-weight: bold;
-        }
-        
-        input {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #ddd;
-            border-radius: 5px;
-            font-size: 16px;
-            transition: border-color 0.3s;
-        }
-        
-        input:focus {
-            outline: none;
-            border-color: #667eea;
-        }
-        
-        button {
-            width: 100%;
-            padding: 12px;
-            background: #667eea;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-        
-        button:hover {
-            background: #764ba2;
-        }
-        
-        .error {
-            color: #e74c3c;
-            margin-top: 10px;
-            text-align: center;
-            display: none;
-        }
-        
-        #mainContent {
-            display: none;
-        }
+        body { font-family: Arial; text-align: center; padding: 50px; }
+        input { padding: 10px; font-size: 16px; }
+        button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
     </style>
 </head>
 <body>
-    <div class="login-container" id="loginForm">
-        <h1>🔐 Accesso</h1>
-        <form onsubmit="checkPassword(event)">
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" required>
-            </div>
-            <button type="submit">Accedi</button>
-            <div class="error" id="error">Password non corretta!</div>
-        </form>
-    </div>
+    <h1>🔐 Accesso</h1>
+    <input type="password" id="pwd" placeholder="Inserisci password">
+    <button onclick="check()">Accedi</button>
+    <p id="err" style="color:red; display:none;">Password sbagliata!</p>
     
-    <div id="mainContent">
-        <iframe src="egitto-gestionale-pwa.html" style="width: 100vw; height: 100vh; border: none;"></iframe>
-    </div>
-
     <script>
-        const correctPassword = 'watchegypt2026';
-        
-        if (sessionStorage.getItem('authenticated') === 'true') {
-            document.getElementById('loginForm').style.display = 'none';
-            document.getElementById('mainContent').style.display = 'block';
-        }
-        
-        function checkPassword(event) {
-            event.preventDefault();
-            const passwordInput = document.getElementById('password').value;
-            
-            if (passwordInput === correctPassword) {
-                sessionStorage.setItem('authenticated', 'true');
-                document.getElementById('loginForm').style.display = 'none';
-                document.getElementById('mainContent').style.display = 'block';
+        const pass = 'watchegypt2026';
+        function check() {
+            if (document.getElementById('pwd').value === pass) {
+                window.location = 'egitto-gestionale-pwa.html';
             } else {
-                document.getElementById('error').style.display = 'block';
-                document.getElementById('password').value = '';
+                document.getElementById('err').style.display = 'block';
             }
         }
     </script>
